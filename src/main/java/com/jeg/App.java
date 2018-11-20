@@ -87,6 +87,11 @@ public class App {
 		pool.shutdown();
 	}
 
+	/**
+	 * Lee el contenido de un archivo y lo pone en una lista
+	 * 
+	 * @return
+	 */
 	private List<String> readFile() {
 		File file = new File(FILENAME);
 		List<String> urls = null;
@@ -102,6 +107,11 @@ public class App {
 		return urls;
 	}
 
+	/**
+	 * Escribe una URL al final del archivo
+	 * 
+	 * @param newUrl
+	 */
 	private static void writeUrl(String newUrl) {
 		Path p = Paths.get(FILENAME);
 		try (BufferedWriter writer = Files.newBufferedWriter(p, StandardOpenOption.APPEND)) {
@@ -111,6 +121,12 @@ public class App {
 		}
 	}
 
+	/**
+	 * Valida que la URL tenga el formato de acuerdo a la especificación.
+	 * 
+	 * @param recurso
+	 * @return
+	 */
 	private static boolean validateUrl(String recurso) {
 		boolean validURL = false;
 		try {

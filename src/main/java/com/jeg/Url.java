@@ -22,7 +22,7 @@ import org.apache.commons.io.IOUtils;
 public class Url extends Processor {
 
 	private final static Logger LOGGER = Logger.getLogger(Url.class.getName());
-	
+
 	private URL url;
 
 	public Url(String resource) {
@@ -32,7 +32,7 @@ public class Url extends Processor {
 			this.url = new URL(resource);
 		} catch (MalformedURLException e) {
 			errorMessage = e.getMessage();
-			LOGGER.warning("Malformed URL has occurred: " + e);			
+			LOGGER.warning("Malformed URL has occurred: " + e);
 		}
 	}
 
@@ -47,8 +47,8 @@ public class Url extends Processor {
 					content = IOUtils.toString(url, StandardCharsets.UTF_8);
 				}
 			} catch (IOException e) {
-				errorMessage = e.getMessage();				
-				LOGGER.warning(resource + " " + e.getMessage());				
+				errorMessage = e.getMessage();
+				LOGGER.warning(resource + " " + e.getMessage());
 			}
 		}
 	}
@@ -77,9 +77,9 @@ public class Url extends Processor {
 
 	@Override
 	public void saveInfo() {
-		
-		String fileName = url!=null ? url.getHost(): "Error"+resource.hashCode();
-		
+
+		String fileName = url != null ? url.getHost() : "Error" + resource.hashCode();
+
 		try (Writer writer = new BufferedWriter(
 				new OutputStreamWriter(new FileOutputStream("c://exercise//" + fileName + ".txt"), "utf-8"))) {
 			if (errorMessage != null) {
@@ -91,13 +91,10 @@ public class Url extends Processor {
 			}
 
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
