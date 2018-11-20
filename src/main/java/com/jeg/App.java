@@ -29,7 +29,7 @@ public class App {
 	private final static Logger LOGGER = Logger.getLogger(App.class.getName());
 
 	private final static String FILENAME = "c:\\exercise\\urls.txt";
-	private final static int THREADS = 6;
+	private final static int THREADS = 5;
 
 	public static void main(String[] args) {
 		long startTime = System.nanoTime();
@@ -48,10 +48,17 @@ public class App {
 		final List<String> urls = app.readFile();
 		app.process(urls, properName);
 		long endTime = System.nanoTime();
-		long timeElapsed = (endTime - startTime)/1000000;
-		System.out.println("All tasks completed in "+timeElapsed+" milliseconds.");
+		long timeElapsed = (endTime - startTime) / 1000000;
+		System.out.println("All tasks completed in " + timeElapsed + " milliseconds.");
 	}
 
+	/**
+	 * Realiza el procesamiento de las URLs (Lee el contenido de cada URL, extrae la
+	 * información según el patrón, y guarda el resultado de cada URL)
+	 * 
+	 * @param urls
+	 * @param properName
+	 */
 	private void process(List<String> urls, String properName) {
 		final ExecutorService pool = Executors.newFixedThreadPool(THREADS);
 		final ExecutorCompletionService<Processor> completionService = new ExecutorCompletionService<>(pool);
@@ -60,7 +67,7 @@ public class App {
 				@Override
 				public Processor call() throws Exception {
 					Processor url = new Url(site);
-					url.obtenerContenido();
+					url.getContent();
 					url.extractInfo(properName);
 					url.saveInfo();
 					return url;
@@ -77,7 +84,7 @@ public class App {
 				e.printStackTrace();
 			}
 		}
-		pool.shutdown();		
+		pool.shutdown();
 	}
 
 	private List<String> readFile() {

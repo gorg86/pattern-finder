@@ -37,7 +37,7 @@ public class Url extends Processor {
 	}
 
 	@Override
-	public void obtenerContenido() {
+	public void getContent() {
 		if (errorMessage == null) {
 			try {
 				content = IOUtils.toString(url, StandardCharsets.UTF_8);

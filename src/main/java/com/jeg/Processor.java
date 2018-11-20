@@ -12,7 +12,7 @@ public abstract class Processor {
 	protected String errorMessage;
 	protected List<String> references;
 
-	public abstract void obtenerContenido();
+	public abstract void getContent();
 
 	public abstract void extractInfo(String pattern);
 
